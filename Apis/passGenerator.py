@@ -84,7 +84,7 @@ class passgen:
 		#print(password)
 		return passgen.joinListValues(self,password)
 
-"""def main():
+def main():
 	try:
 		passSize = int(input('Longitud de la contraseña (número de caracteres): '))
 		if passSize > 30:
@@ -141,4 +141,4 @@ if __name__ == '__main__':
 	try:
 		main()
 	except Exception as e:
-		print('El programa ha finalizado debido a un error, certifique los datos ingresados.\nError info: '+str(e))"""
+		print('El programa ha finalizado debido a un error, certifique los datos ingresados.\nError info: '+str(e))
