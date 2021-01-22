@@ -1,4 +1,5 @@
 from decouple import config as config_decouple
+from config import config
 from flask import Flask
 from flask_restful import Api
 from Apis.PasswordGenerator.passGenerator_API import passwordGeneratorAPI
@@ -6,11 +7,12 @@ from Apis.PasswordGenerator.passGenerator_API import passwordGeneratorAPI
 app = Flask(__name__)
 api = Api(app)
 
-app.config['TESTING'] = False
-#todos = {}
-enviroment = config['development']
+environment = config['development']
 if config_decouple('PRODUCTION', default=False):
-    enviroment = config['production']
+    environment = config['production']
+
+app.config['TESTING'] = False
+app.config.from_object(environment)
 
 ###############	Routes
 api.add_resource(
