@@ -57,32 +57,35 @@ class passgen:
 		return join
 
 	def generatePass(self):
-		password = list()
-		asciis = passgen.get_asciiList(self)
-		
-		if passgen.get_capitalLetter(self) == False:
-			asciis = passgen.cleanCapitalLetters(self,asciis)
-		if passgen.get_lowCaseLetter(self) == False:
-			asciis = passgen.cleanLowerCaseLetters(self,asciis)
-		if passgen.get_puntuation(self) == False:
-			asciis = passgen.cleanPuntuation(self,asciis)
-		if passgen.get_specialCharacters(self) == False:
-			asciis = passgen.cleanSpecialCharacters(self,asciis)
-		#print('\n')
-		#print('Tamaño de la lista Ascii: ', len(asciis))
-		#print(asciis)
-		#print('\n')
-		while len(asciis) <= passgen.get_passlength(self):
-			asciis.extend(asciis)
-		for word in range(passgen.get_passlength(self)):
-			randomNumb = random.randint(0,len(asciis)-1)
-			#print(str(randomNumb))
-			#print(str(randomNumb) +' ----> ' + str(asciis[randomNumb]))
-			password.append(asciis[randomNumb])
-		#print(passgen.get_asciiList(self))
-		#print('\n')
-		#print(password)
-		return passgen.joinListValues(self,password)
+		if passgen.get_passlength(self) < 30:
+			password = list()
+			asciis = passgen.get_asciiList(self)	
+
+			if passgen.get_capitalLetter(self) == False:
+				asciis = passgen.cleanCapitalLetters(self,asciis)
+			if passgen.get_lowCaseLetter(self) == False:
+				asciis = passgen.cleanLowerCaseLetters(self,asciis)
+			if passgen.get_puntuation(self) == False:
+				asciis = passgen.cleanPuntuation(self,asciis)
+			if passgen.get_specialCharacters(self) == False:
+				asciis = passgen.cleanSpecialCharacters(self,asciis)
+			#print('\n')
+			#print('Tamaño de la lista Ascii: ', len(asciis))
+			#print(asciis)
+			#print('\n')
+			while len(asciis) <= passgen.get_passlength(self):
+				asciis.extend(asciis)
+			for word in range(passgen.get_passlength(self)):
+				randomNumb = random.randint(0,len(asciis)-1)
+				#print(str(randomNumb))
+				#print(str(randomNumb) +' ----> ' + str(asciis[randomNumb]))
+				password.append(asciis[randomNumb])
+			#print(passgen.get_asciiList(self))
+			#print('\n')
+			#print(password)
+			return passgen.joinListValues(self,password)
+		else:
+			return 'You have overpassed the maximum length, the maximum length is 29 characters'
 
 """def main():
 	try:
