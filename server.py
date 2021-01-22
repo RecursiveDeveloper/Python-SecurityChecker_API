@@ -25,8 +25,6 @@ api.add_resource(
 	passwordGeneratorAPI,
 	'/passGen/<int:passlength>/<int:capitalLetter>/<int:lowCaseLetter>/<int:puntuation>/<int:specialCharacters>/'
 )
-
-api.add_resource()
 ###############
 
 if __name__ == '__main__':
