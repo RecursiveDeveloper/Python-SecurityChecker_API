@@ -4,6 +4,7 @@ from flask import Flask
 from flask_restful import Api
 from Apis.PasswordGenerator.passGenerator_API import passwordGeneratorAPI
 from Apis.defaultPage import DefaultPage
+from flask_cors import CORS
 
 app = Flask(__name__)
 api = Api(app)
