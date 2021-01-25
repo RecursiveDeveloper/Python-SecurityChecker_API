@@ -7,6 +7,7 @@ from Apis.defaultPage import DefaultPage
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 environment = config['development']
 if config_decouple('PRODUCTION', default=False):
