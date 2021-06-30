@@ -37,7 +37,7 @@ class faceDetection:
                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 
                 2
             )
-            print(face, i)
+            #print(face, i)
         ########
 
         face_rects = CascadeClassifier.detectMultiScale(
@@ -64,8 +64,6 @@ class faceDetection:
         
         while True:
             frames = faceDetection.get_Camera_Frame(self,video_capture,ds_factor,faceCascade,detector)
-            print(frames)
-            print('\n')
             yield b"--frame\r\nContent-Type: image/jpeg\r\n\r\n" + frames + b"\r\n"
             
         video_capture.release()
@@ -76,4 +74,5 @@ Code extracted from:
 https://techvidvan.com/tutorials/face-recognition-project-python-opencv/
 https://medium.datadriveninvestor.com/video-streaming-using-flask-and-opencv-c464bf8473d6
 https://github.com/parzibyte/tomar_foto_flask_python/blob/main/app.py
+https://www.geeksforgeeks.org/count-number-of-faces-using-python-opencv/
 """
