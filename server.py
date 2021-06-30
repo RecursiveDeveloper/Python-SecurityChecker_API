@@ -1,8 +1,9 @@
 from decouple import config as config_decouple
 from config import config
-from flask import Flask
+from flask import Flask, render_template
 from flask_restful import Api
 from Apis.PasswordGenerator.passGenerator_API import passwordGeneratorAPI
+from Apis.ImageDetection.face_detection_API import ImageDetectionAPI
 from Apis.defaultPage import DefaultPage
 from flask_cors import CORS
 
@@ -18,6 +19,10 @@ app.config['TESTING'] = False
 app.config.from_object(environment)
 
 ###############	Routes
+"""@app.route('/WebFaceDetection/')
+def index():
+    return render_template("index.html")
+"""
 api.add_resource(
 	DefaultPage,
 	'/'
@@ -26,6 +31,11 @@ api.add_resource(
 api.add_resource(
 	passwordGeneratorAPI,
 	'/passGen/<int:passlength>/<int:capitalLetter>/<int:lowCaseLetter>/<int:puntuation>/<int:specialCharacters>/'
+)
+
+api.add_resource(
+	ImageDetectionAPI,
+	'/FaceDetection'
 )
 ###############
 
