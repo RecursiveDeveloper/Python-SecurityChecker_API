@@ -2,11 +2,10 @@ import string
 import random
 
 class passgen:
-	def __init__(self, passlength, capitalLetter, lowCaseLetter, puntuation, specialCharacters):
+	def __init__(self, passlength, capitalLetter, lowCaseLetter, specialCharacters):
 		self.__passlength = passlength # Private __  # Protected _
 		self.__capitalLetter = capitalLetter
 		self.__lowCaseLetter = lowCaseLetter
-		self.__puntuation = puntuation
 		self.__specialCharacters = specialCharacters
 
 	def get_passlength(self):
@@ -17,9 +16,6 @@ class passgen:
 
 	def get_lowCaseLetter(self):
 		return self.__lowCaseLetter
-
-	def get_puntuation(self):
-		return self.__puntuation
 
 	def get_specialCharacters(self):
 		return self.__specialCharacters
@@ -37,11 +33,6 @@ class passgen:
 	def cleanLowerCaseLetters(self, lista):
 		lowerCaseLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 		cleanList = [x for x in lista if lowerCaseLetters.__contains__(x) == False]
-		return cleanList
-
-	def cleanPuntuation(self, lista):
-		puntuations = ['!', '"' , "'" ,',' , '-' , '.' , ':', ';' , '?' , '^' , '_' , '`' , '~']
-		cleanList = [x for x in lista if puntuations.__contains__(x) == False]
 		return cleanList
 
 	def cleanSpecialCharacters(self,lista):
@@ -65,8 +56,6 @@ class passgen:
 				asciis = passgen.cleanCapitalLetters(self,asciis)
 			if passgen.get_lowCaseLetter(self) == False:
 				asciis = passgen.cleanLowerCaseLetters(self,asciis)
-			if passgen.get_puntuation(self) == False:
-				asciis = passgen.cleanPuntuation(self,asciis)
 			if passgen.get_specialCharacters(self) == False:
 				asciis = passgen.cleanSpecialCharacters(self,asciis)
 			#print('\n')

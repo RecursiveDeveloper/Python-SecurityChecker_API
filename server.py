@@ -26,7 +26,7 @@ api.add_resource(
 
 api.add_resource(
 	passwordGeneratorAPI,
-	'/passGen/<int:passlength>/<int:capitalLetter>/<int:lowCaseLetter>/<int:puntuation>/<int:specialCharacters>/'
+	'/passGen/<int:passlength>/<int:capitalLetter>/<int:lowCaseLetter>/<int:specialCharacters>/'
 )
 
 api.add_resource(
