@@ -3,7 +3,6 @@ from config import config
 from flask import Flask
 from flask_restful import Api
 from Apis.PasswordGenerator.passGenerator_API import passwordGeneratorAPI
-from Apis.ImageDetection.face_detection_API import ImageDetectionAPI
 from Apis.defaultPage import DefaultPage
 from flask_cors import CORS
 
@@ -29,11 +28,7 @@ api.add_resource(
 	'/passGen/<int:passlength>/<int:capitalLetter>/<int:lowCaseLetter>/<int:specialCharacters>/'
 )
 
-api.add_resource(
-	ImageDetectionAPI,
-	'/FaceDetection'
-)
 ###############
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
