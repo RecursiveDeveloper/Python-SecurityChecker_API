@@ -17,7 +17,6 @@ if config_decouple('PRODUCTION', default=False):
 app.config['TESTING'] = False
 app.config.from_object(environment)
 
-###############	Routes
 api.add_resource(
 	DefaultPage,
 	'/'
@@ -28,7 +27,6 @@ api.add_resource(
 	'/passGen/<int:passlength>/<int:capitalLetter>/<int:lowCaseLetter>/<int:specialCharacters>/'
 )
 
-###############
-
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host="0.0.0.0", port=5000, debug=False)
+	
