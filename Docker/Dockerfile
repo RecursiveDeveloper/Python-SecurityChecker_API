@@ -5,7 +5,8 @@ WORKDIR /app/python_security_checker/
 COPY . ./
 
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt || \
+    pip install -r ../requirements.txt
 
 EXPOSE 5000/tcp
 

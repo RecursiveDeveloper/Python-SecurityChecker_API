@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  flaskapp:
+    build:
+      context: ./../
+      dockerfile: Docker/Dockerfile
+    container_name: 'flaskapp'
+    ports:
+      - '5000:5000/tcp'
+    networks:
+      - flasknet
+
+networks:
+  flasknet:
+    name: flask-network
+    driver: bridge
