@@ -1,44 +1,78 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'Basic sample template to create a VPC attached to an EC2 instance'
+Description: 'Basic sample template to create an EC2 instance in a VPC'
+
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: 'VPC id'
+  ImageId:
+    Type: AWS::EC2::Image::Id
+    Description: 'Amazon Linux 2 Kernel 5.10 AMI 2.0.20221210.1 x86_64 HVM gp2'
+    Default: ami-0b5eea76982371e91
+  InstanceType:
+    Type: String
+    Description: 'Choosing t2 micro because it is free'
+    Default: t2.micro
+
 Resources:
-  SampleVCP:
-    Type: AWS::EC2::VPC
-    Properties:
-      CidrBlock: '10.0.0.0/16'
-      EnableDnsHostnames: false
-      EnableDnsSupport: false
-      Tags:
-        - Key: 'Environment'
-          Value: 'Development'
-        - Key: 'Owner'
-          Value: 'RecursiveDeveloper'
   SampleKeyPair:
     Type: AWS::EC2::KeyPair
     Properties:
-      KeyName: SampleEC2KeyPair
+      KeyName: 'SampleKeyPair'
       KeyType: rsa
+      Tags:
+        - Key: Environment
+          Value: 'Development'
+        - Key: Owner
+          Value: 'RecursiveDeveloper'
   SampleEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: 'ami-0b5eea76982371e91'
-      InstanceType: "t2.micro"
+      ImageId: !Ref ImageId
+      InstanceType: !Ref InstanceType
       KeyName: !Ref SampleKeyPair
       Monitoring: false
       SecurityGroupIds:
-        - String
-      SecurityGroups:
-        - String
-      SubnetId: String
-      Tags:
-        - Key: 'Environment'
-          Value: 'Development'
-        - Key: 'Owner'
-          Value: 'RecursiveDeveloper'
+        - !Ref SampleSecurityGroup
       UserData:
         Fn::Base64:
-            #!/bin/bash
-            yum update -y
-            yum install -y httpd.x86_64
-            systemctl start httpd.service
-            systemctl enable httpd.service
-            echo ?Hello World from $(hostname -f)? > /var/www/html/index.html<<EOF
+          !Sub |
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd.x86_64
+          systemctl start httpd.service
+          systemctl enable httpd.service
+          echo ?Hello World from $(hostname -f)? > /var/www/html/index.html
+      Tags:
+        - Key: Environment
+          Value: 'Development'
+        - Key: Owner
+          Value: 'RecursiveDeveloper'
+  SampleSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VpcId
+      GroupDescription: 'Security Group to allow SSH access via port 22'
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: '0.0.0.0/0'
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: '0.0.0.0/0'
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: '0.0.0.0/0'
+      Tags:
+        - Key: Environment
+          Value: 'Development'
+        - Key: Owner
+          Value: 'RecursiveDeveloper'
+
+Outputs:
+  SampleEC2InstanceId:
+    Description: 'Instance Id'
+    Value: !Ref SampleEC2Instance

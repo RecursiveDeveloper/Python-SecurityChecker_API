@@ -1,8 +1,0 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Description: 'Basic sample template to create a VPC attached to an EC2 instance'
-Resources:
-  SampleKeyPair:
-    Type: AWS::EC2::KeyPair
-    Properties:
-      KeyName: SampleEC2KeyPair
-      KeyType: rsa
