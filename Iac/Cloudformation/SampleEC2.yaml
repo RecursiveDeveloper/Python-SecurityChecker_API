@@ -37,12 +37,11 @@ Resources:
       UserData:
         Fn::Base64:
           !Sub |
-          #!/bin/bash
-          yum update -y
-          yum install -y httpd.x86_64
-          systemctl start httpd.service
-          systemctl enable httpd.service
-          echo ?Hello World from $(hostname -f)? > /var/www/html/index.html
+            #!/bin/bash
+            sudo yum update -y
+            sudo yum -y install httpd -y
+            sudo service httpd start
+            echo "Hello world from EC2 $(hostname -f)" > /var/www/html/index.html
       Tags:
         - Key: Environment
           Value: 'Development'
